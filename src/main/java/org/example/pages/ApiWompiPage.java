@@ -102,4 +102,23 @@ public class ApiWompiPage {
                 .response();
     }
 
+    public Response hacerPeticionGetAPIEstadoTransaccionConIdIncorrecto(String endpoint){
+        return given()
+                .header("Content-Type", "application/json")
+                .when()
+                .get(baseUrl + endpoint + "15113-1735659146-AAAAA")
+                .then()
+                .extract()
+                .response();
+    }
+
+    public Response hacerPeticionGetAPIEstadoTransaccionConIdVacio(String endpoint){
+        return given()
+                .header("Content-Type", "application/json")
+                .when()
+                .get(baseUrl + endpoint)
+                .then()
+                .extract()
+                .response();
+    }
 }

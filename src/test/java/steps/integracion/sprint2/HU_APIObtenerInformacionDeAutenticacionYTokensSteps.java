@@ -24,7 +24,7 @@ public class HU_APIObtenerInformacionDeAutenticacionYTokensSteps {
 
     @When("la API de autenticación responde con un código de estado {int}")
     public void laAPIDeAutenticaciónRespondeConUnCódigoDeEstado(int statusCodeBdd) {
-        Assert.assertEquals(statusCode, statusCodeBdd, "Status code should be 401");
+        Assert.assertEquals(statusCode, statusCodeBdd, "Status code should be "+statusCodeBdd);
         System.out.println("✔ La API respondió con el código de estado " + statusCode);
     }
 
@@ -58,7 +58,6 @@ public class HU_APIObtenerInformacionDeAutenticacionYTokensSteps {
         statusCode = response.getStatusCode();
         System.out.println("Respuesta de la API: " + response.asString());
     }
-
 
     @Then("el campo mensaje {string} en la respuesta de la autenticación debe ser {string}")
     public void elCampoMensajeEnLaRespuestaDeLaAutenticaciónDebeSer(String campoJson, String contenidoEsperado) {
