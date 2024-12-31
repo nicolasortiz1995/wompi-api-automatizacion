@@ -1,5 +1,4 @@
 package org.example.utils;
-import org.example.utils.GlobalVariables;
 
 public class GenerarPayloads {
     public static String payloadTransaccionE1(String acceptanceToken, String acceptPersonalAuth, String llaveIntegridad, String sandBoxStatus) {
@@ -7,8 +6,8 @@ public class GenerarPayloads {
         String referenciaAleatoria = GenerarData.generarReferencia();
         String correoAleatorio = GenerarData.generarCorreoElectronicoAleatorio();
         String hashAleatorio = GenerarData.generarHashSHA256(referenciaAleatoria + montoAleatorio + "COP" + llaveIntegridad);
-        GlobalVariables.globalReferenciaAleatoria = referenciaAleatoria;
-        GlobalVariables.globalMontoAleatorio = montoAleatorio;
+        VariablesGlobales.globalReferenciaAleatoria = referenciaAleatoria;
+        VariablesGlobales.globalMontoAleatorio = montoAleatorio;
 
         System.out.println("Referencia: " + referenciaAleatoria);
         System.out.println("Monto: " + montoAleatorio);

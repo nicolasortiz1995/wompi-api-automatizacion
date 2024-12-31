@@ -2,9 +2,9 @@ Feature: Realizar pruebas de integración con la API de información del comerci
 
     Como usuario que desea obtener información de un comercio
     Quiero realizar una peticiones a la API de información del comercio
-    Para obtener la información del comercio
+    Para obtener confirmar la estabilidad del servicio y persistencia de datos
 
-  @ruta-triste @integracion
+  @ruta-triste @integracion @sprint1
     Scenario: Petición a la API de información del comercio con una llave privada errónea
         Given que envío una petición GET a la API de información del comercio al endpoint "merchants/" con la llave privada incorrecta
         When la API responde con un código de estado 401

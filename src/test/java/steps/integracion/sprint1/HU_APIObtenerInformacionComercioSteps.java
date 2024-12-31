@@ -45,7 +45,6 @@ public class HU_APIObtenerInformacionComercioSteps {
         System.out.println("✔ Se obtuvo correctamente el campo " + campoJson);
     }
 
-
     @Given("que envío una petición GET a la API de información del comercio al endpoint {string} sin headers")
     public void queEnvíoUnaPeticiónGETALaAPIDeInformaciónDelComercioAlEndpointSinHeaders(String endpoint) {
         response = apiPage.hacerPeticionGetAPIInformacionComercialSinHeaders(endpoint);

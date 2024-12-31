@@ -1,6 +1,6 @@
 package org.example.utils;
 
-public class GlobalVariables {
+public class VariablesGlobales {
     public static String globalAceptacionPrefirmada;
     public static String globalPrefirmadoPersonal;
     public static String globalLlavePublica;

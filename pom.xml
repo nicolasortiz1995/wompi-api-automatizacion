@@ -161,9 +161,9 @@
             </build>
         </profile>
 
-        <!-- Perfil para pruebas de humo -->
+        <!-- Perfil para pruebas del sprint 1 -->
         <profile>
-            <id>smoke-tests</id>
+            <id>sprint1</id>
             <build>
                 <plugins>
                     <plugin>
@@ -175,7 +175,29 @@
                                 <include>**/TestRunner.java</include>
                             </includes>
                             <systemPropertyVariables>
-                                <cucumber.filter.tags>@Smoke</cucumber.filter.tags>
+                                <cucumber.filter.tags>@sprint1</cucumber.filter.tags>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Perfil para pruebas del sprint 2 -->
+        <profile>
+            <id>sprint2</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${maven.surefire.plugin.version}</version>
+                        <configuration>
+                            <includes>
+                                <include>**/TestRunner.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <cucumber.filter.tags>@sprint2</cucumber.filter.tags>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>

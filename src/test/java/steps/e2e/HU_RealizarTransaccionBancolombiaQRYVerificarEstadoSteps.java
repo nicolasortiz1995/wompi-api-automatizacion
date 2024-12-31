@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 import org.example.pages.ApiWompiPage;
 import org.example.utils.ExtraerCamposHelper;
 import org.example.utils.GenerarPayloads;
-import org.example.utils.GlobalVariables;
+import org.example.utils.VariablesGlobales;
 import org.testng.Assert;
 
 public class HU_RealizarTransaccionBancolombiaQRYVerificarEstadoSteps {
@@ -45,7 +45,7 @@ public class HU_RealizarTransaccionBancolombiaQRYVerificarEstadoSteps {
         Assert.assertFalse(llavePublica.isEmpty(), "El campo no debe estar vacío");
         System.out.println("Valor de '" + llavePublicaBdd + "': " + llavePublica);
         System.out.println("✔ Se obtuvo correctamente la llave pública");
-        GlobalVariables.globalLlavePublica = llavePublica;
+        VariablesGlobales.globalLlavePublica = llavePublica;
     }
 
     @Then("obtengo la llave de integridad {string}")
@@ -55,12 +55,12 @@ public class HU_RealizarTransaccionBancolombiaQRYVerificarEstadoSteps {
         Assert.assertFalse(llaveIntegridad.isEmpty(), "El campo no debe estar vacío");
         System.out.println("Valor de '" + llaveIntegridadBdd + "': " + llaveIntegridad);
         System.out.println("✔ Se obtuvo correctamente la llave de integridad");
-        GlobalVariables.globalLlaveIntegridad = llaveIntegridad;
+        VariablesGlobales.globalLlaveIntegridad = llaveIntegridad;
     }
 
     @Given("que realizo una petición al endpoint {string} con la llave pública correcta")
     public void queRealizoUnaPeticiónAlEndpointConLaLlavePúblicaCorrecta(String endpointBdd) {
-        response = apiPage.hacerPeticionParaObtenerToken(GlobalVariables.globalLlavePublica, endpointBdd);
+        response = apiPage.hacerPeticionParaObtenerToken(VariablesGlobales.globalLlavePublica, endpointBdd);
         statusCode = response.getStatusCode();
         System.out.println("✔ Se realizó la petición al endpoint " + endpointBdd + " con la llave pública correcta");
         System.out.println("Respuesta de la API: " + response.asString());
@@ -73,20 +73,20 @@ public class HU_RealizarTransaccionBancolombiaQRYVerificarEstadoSteps {
         Assert.assertFalse(aceptacionPrefirmada.isEmpty(), "El campo no debe estar vacío");
         System.out.println("Valor de '" + campoAceptacionToken + "': " + aceptacionPrefirmada);
         System.out.println("✔ Se obtuvo correctamente la aceptación prefirmada");
-        GlobalVariables.globalAceptacionPrefirmada = aceptacionPrefirmada;
+        VariablesGlobales.globalAceptacionPrefirmada = aceptacionPrefirmada;
 
         prefirmadoPersonal = metodosAuxiliares.extraerPrefirmadoPersonal(response, campoAceptacionToken);
         Assert.assertNotNull(prefirmadoPersonal, "El campo no debe ser nulo");
         Assert.assertFalse(prefirmadoPersonal.isEmpty(), "El campo no debe estar vacío");
         System.out.println("Valor de '" + campoAceptacionToken + "': " + prefirmadoPersonal);
         System.out.println("✔ Se obtuvo correctamente el prefirmado personal");
-        GlobalVariables.globalPrefirmadoPersonal = prefirmadoPersonal;
+        VariablesGlobales.globalPrefirmadoPersonal = prefirmadoPersonal;
         System.out.println("✔ Se verificaron los dos campos de token");
     }
 
     @Given("que envio una petición POST a la API de Wompi al endpoint {string} con el metodo de pago {string} y sandbox_status {string}")
     public void queEnvioUnaPeticiónPOSTALaAPIDeWompiAlEndpointConElMetodoDePagoYSandbox_status(String endpoint, String metodoPago, String sandBoxStatusBdd) {
-        response = apiPage.hacerPeticionTransaccionesPostConPayload(endpoint, GenerarPayloads.payloadTransaccionE1(GlobalVariables.globalAceptacionPrefirmada, GlobalVariables.globalPrefirmadoPersonal, GlobalVariables.globalLlaveIntegridad, sandBoxStatusBdd));
+        response = apiPage.hacerPeticionTransaccionesPostConPayload(endpoint, GenerarPayloads.payloadTransaccionE1(VariablesGlobales.globalAceptacionPrefirmada, VariablesGlobales.globalPrefirmadoPersonal, VariablesGlobales.globalLlaveIntegridad, sandBoxStatusBdd));
         statusCode = response.getStatusCode();
         System.out.println("Respuesta de la API: " + response.asString());
         System.out.println("✔ Se realizó la petición al método de pago: " + metodoPago);
@@ -99,19 +99,19 @@ public class HU_RealizarTransaccionBancolombiaQRYVerificarEstadoSteps {
         Assert.assertFalse(idTransaccion.isEmpty(), "El campo no debe estar vacío");
         System.out.println("Valor de '" + idTransaccionBdd + "': " + idTransaccion);
         System.out.println("✔ Se obtuvo correctamente el id de la transacción");
-        GlobalVariables.globalIdTransaccion = idTransaccion;
+        VariablesGlobales.globalIdTransaccion = idTransaccion;
 
         datoCreacionTransaccion = metodosAuxiliares.extraerDatosTransaccion(response, datoCreacionTransaccionBdd);
         Assert.assertNotNull(datoCreacionTransaccion, "El campo no debe ser nulo");
         Assert.assertFalse(datoCreacionTransaccion.isEmpty(), "El campo no debe estar vacío");
         System.out.println("Valor de '" + datoCreacionTransaccionBdd + "': " + datoCreacionTransaccion);
         System.out.println("✔ Se obtuvo correctamente el dato de creación de la transacción");
-        GlobalVariables.globalDatoCreacionTransaccion = datoCreacionTransaccion;
+        VariablesGlobales.globalDatoCreacionTransaccion = datoCreacionTransaccion;
     }
 
     @Given("que envío una petición GET a la API de Wompi al endpoint {string} con el id de la transacción")
     public void queEnvíoUnaPeticiónGETALaAPIDeWompiAlEndpointConElIdDeLaTransacción(String endpoint) {
-        response = apiPage.hacerPeticionGetParaObtenerEstadoTransaccion(endpoint, GlobalVariables.globalIdTransaccion);
+        response = apiPage.hacerPeticionGetParaObtenerEstadoTransaccion(endpoint, VariablesGlobales.globalIdTransaccion);
         statusCode = response.getStatusCode();
         System.out.println("Respuesta de la API: " + response.asString());
     }
@@ -138,7 +138,7 @@ public class HU_RealizarTransaccionBancolombiaQRYVerificarEstadoSteps {
         datoExtraidoEnJson = metodosAuxiliares.extraerDatosTransaccion(response, campoJson);
         Assert.assertNotNull(datoExtraidoEnJson, "El campo no debe ser nulo");
         Assert.assertFalse(datoExtraidoEnJson.isEmpty(), "El campo no debe estar vacío");
-        Assert.assertEquals(datoExtraidoEnJson, GlobalVariables.globalMontoAleatorio, "La respuesta del " + campoJson + " debe ser " + GlobalVariables.globalMontoAleatorio);
+        Assert.assertEquals(datoExtraidoEnJson, VariablesGlobales.globalMontoAleatorio, "La respuesta del " + campoJson + " debe ser " + VariablesGlobales.globalMontoAleatorio);
     }
 
 
@@ -147,7 +147,7 @@ public class HU_RealizarTransaccionBancolombiaQRYVerificarEstadoSteps {
         datoExtraidoEnJson = metodosAuxiliares.extraerDatosTransaccion(response, campoJson);
         Assert.assertNotNull(datoExtraidoEnJson, "El campo no debe ser nulo");
         Assert.assertFalse(datoExtraidoEnJson.isEmpty(), "El campo no debe estar vacío");
-        Assert.assertEquals(datoExtraidoEnJson, GlobalVariables.globalReferenciaAleatoria, "La respuesta del " + campoJson + " debe ser " + GlobalVariables.globalMontoAleatorio);
+        Assert.assertEquals(datoExtraidoEnJson, VariablesGlobales.globalReferenciaAleatoria, "La respuesta del " + campoJson + " debe ser " + VariablesGlobales.globalMontoAleatorio);
     }
 
 

@@ -30,4 +30,8 @@ public class ExtraerCamposHelper {
     public String extraerDatosRespuestaError(Response response, String atributo) {
         return response.jsonPath().getString("error." + atributo);
     }
+
+    public String extraerDatosMessagePublicKey(Response response, String atributo) {
+        return response.jsonPath().getString("error.messages." + atributo +"[0]");
+    }
 }
