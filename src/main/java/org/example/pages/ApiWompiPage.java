@@ -14,13 +14,13 @@ public class ApiWompiPage {
                 .header("Authorization", "Bearer " + apiKey)
                 .header("Content-Type", "application/json")
                 .when()
-                .get(baseUrl+endpoint)
+                .get(baseUrl + endpoint)
                 .then()
                 .extract()
                 .response();
     }
 
-    public Response hacerPeticionParaObtenerToken(String llavePublica, String endpoint){
+    public Response hacerPeticionParaObtenerToken(String llavePublica, String endpoint) {
         return given()
                 .header("Content-Type", "application/json")
                 .when()
@@ -42,12 +42,31 @@ public class ApiWompiPage {
                 .response();
     }
 
-    public Response hacerPeticionGetParaObtenerEstadoTransaccion(String endpoint, String idTransaccion){
-        System.out.println("Id de la transacción: "+endpoint+idTransaccion);
+    public Response hacerPeticionGetParaObtenerEstadoTransaccion(String endpoint, String idTransaccion) {
         return given()
                 .header("Content-Type", "application/json")
                 .when()
                 .get(baseUrl + endpoint + idTransaccion)
+                .then()
+                .extract()
+                .response();
+    }
+
+    public Response hacerPeticionGetAPIInformacionComercioLlaveErronea(String endpoint) {
+        return given()
+                .header("Authorization", "Bearer prv_stagtest_5i0ZGIGiFcDQifYsXxvsny7Y37Error")
+                .header("Content-Type", "application/json")
+                .when()
+                .get(baseUrl + endpoint)
+                .then()
+                .extract()
+                .response();
+    }
+
+    public Response hacerPeticionGetAPIInformacionComercialSinHeaders(String endpoint) {
+        return given()
+                .when()
+                .get(baseUrl + endpoint)
                 .then()
                 .extract()
                 .response();

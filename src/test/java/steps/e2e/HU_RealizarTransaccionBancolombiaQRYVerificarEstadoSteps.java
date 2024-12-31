@@ -10,7 +10,7 @@ import org.example.utils.GenerarPayloads;
 import org.example.utils.GlobalVariables;
 import org.testng.Assert;
 
-public class HU_RealizarTransaccionYVerificarEstadoSteps {
+public class HU_RealizarTransaccionBancolombiaQRYVerificarEstadoSteps {
     private final ApiWompiPage apiPage = new ApiWompiPage();
     private final ExtraerCamposHelper metodosAuxiliares = new ExtraerCamposHelper();
 

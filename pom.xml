@@ -139,9 +139,9 @@
             </build>
         </profile>
 
-        <!-- Perfil para pruebas de regresión -->
+        <!-- Perfil para pruebas con escenarios fallidos -->
         <profile>
-            <id>regression-tests</id>
+            <id>rutas-tristes</id>
             <build>
                 <plugins>
                     <plugin>
@@ -153,7 +153,7 @@
                                 <include>**/TestRunner.java</include>
                             </includes>
                             <systemPropertyVariables>
-                                <cucumber.filter.tags>@Regression</cucumber.filter.tags>
+                                <cucumber.filter.tags>@ruta-triste</cucumber.filter.tags>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
