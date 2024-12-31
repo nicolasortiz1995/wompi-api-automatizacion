@@ -22,6 +22,8 @@ public class HU_RealizarTransaccionYVerificarEstadoSteps {
     private String prefirmadoPersonal;
     private String idTransaccion;
     private String datoCreacionTransaccion;
+    private String datoExtraidoEnJson;
+
 
     @Given("que envío una petición GET a la API de Wompi al endpoint {string}")
     public void queEnvíoUnaPeticiónGETALaAPIDeWompiAlEndpoint(String endpoint) {
@@ -30,9 +32,9 @@ public class HU_RealizarTransaccionYVerificarEstadoSteps {
         System.out.println("Respuesta de la API: " + response.asString());
     }
 
-    @When("la API responde exitosamente con un código de estado {int}")
-    public void laAPIRespondeExitosamenteConUnCódigoDeEstado(int statusCodeBdd) {
-        Assert.assertEquals(statusCode, statusCodeBdd, "Status code should be 200");
+    @When("la API responde exitosamente con un código de estado {int} o {int}")
+    public void laAPIRespondeExitosamenteConUnCódigoDeEstadoO(int statusCodeBdd1, int statusCodeBdd2) {
+        Assert.assertTrue(statusCode == statusCodeBdd1 || statusCode == statusCodeBdd2, "El estatus code debería ser 200 o 201");
         System.out.println("✔ La API respondió exitosamente con el código de estado " + statusCode);
     }
 
@@ -107,6 +109,54 @@ public class HU_RealizarTransaccionYVerificarEstadoSteps {
         GlobalVariables.globalDatoCreacionTransaccion = datoCreacionTransaccion;
     }
 
+    @Given("que envío una petición GET a la API de Wompi al endpoint {string} con el id de la transacción")
+    public void queEnvíoUnaPeticiónGETALaAPIDeWompiAlEndpointConElIdDeLaTransacción(String endpoint) {
+        response = apiPage.hacerPeticionGetParaObtenerEstadoTransaccion(endpoint, GlobalVariables.globalIdTransaccion);
+        statusCode = response.getStatusCode();
+        System.out.println("Respuesta de la API: " + response.asString());
+    }
 
+    @Then("el campo {string} en el payment_method de la respuesta debe ser {string}")
+    public void elCampoEnElPayment_methodDeLaRespuestaDebeSer(String campoJson, String contenidoEsperado) {
+        datoExtraidoEnJson = metodosAuxiliares.extraerDatosPaymentMethod(response, campoJson);
+        Assert.assertNotNull(datoExtraidoEnJson, "El campo no debe ser nulo");
+        Assert.assertFalse(datoExtraidoEnJson.isEmpty(), "El campo no debe estar vacío");
+        Assert.assertEquals(datoExtraidoEnJson, contenidoEsperado, "La respuesta del " + campoJson + " debe ser " + contenidoEsperado);
+    }
+
+
+    @Then("el campo {string} en el payment_method de la respuesta debe ser el enviado en la petición")
+    public void elCampoEnElPayment_methodDeLaRespuestaDebeSerElEnviadoEnLaPetición(String campoJson) {
+        datoExtraidoEnJson = metodosAuxiliares.extraerDatosPaymentMethod(response, campoJson);
+        Assert.assertNotNull(datoExtraidoEnJson, "El campo no debe ser nulo");
+        Assert.assertFalse(datoExtraidoEnJson.isEmpty(), "El campo no debe estar vacío");
+        Assert.assertEquals(datoExtraidoEnJson, "Pago a Tienda Wompi TC Bancolombia QR", "La respuesta del " + campoJson + " debe ser 'Pago a Tienda Wompi TC Bancolombia QR'");
+    }
+
+    @Then("el campo {string} en la respuesta debe ser el enviado en la petición")
+    public void elCampoEnLaRespuestaDebeSerElEnviadoEnLaPetición(String campoJson) {
+        datoExtraidoEnJson = metodosAuxiliares.extraerDatosTransaccion(response, campoJson);
+        Assert.assertNotNull(datoExtraidoEnJson, "El campo no debe ser nulo");
+        Assert.assertFalse(datoExtraidoEnJson.isEmpty(), "El campo no debe estar vacío");
+        Assert.assertEquals(datoExtraidoEnJson, GlobalVariables.globalMontoAleatorio, "La respuesta del " + campoJson + " debe ser " + GlobalVariables.globalMontoAleatorio);
+    }
+
+
+    @Then("el campo {string} en la respuesta debe ser la enviada en la petición")
+    public void elCampoEnLaRespuestaDebeSerLaEnviadaEnLaPetición(String campoJson) {
+        datoExtraidoEnJson = metodosAuxiliares.extraerDatosTransaccion(response, campoJson);
+        Assert.assertNotNull(datoExtraidoEnJson, "El campo no debe ser nulo");
+        Assert.assertFalse(datoExtraidoEnJson.isEmpty(), "El campo no debe estar vacío");
+        Assert.assertEquals(datoExtraidoEnJson, GlobalVariables.globalReferenciaAleatoria, "La respuesta del " + campoJson + " debe ser " + GlobalVariables.globalMontoAleatorio);
+    }
+
+
+    @Then("el campo {string} en la respuesta debe ser {string}")
+    public void elCampoEnLaRespuestaDebeSer(String campoJson, String contenidoEsperado) {
+        datoExtraidoEnJson = metodosAuxiliares.extraerDatosTransaccion(response, campoJson);
+        Assert.assertNotNull(datoExtraidoEnJson, "El campo no debe ser nulo");
+        Assert.assertFalse(datoExtraidoEnJson.isEmpty(), "El campo no debe estar vacío");
+        Assert.assertEquals(datoExtraidoEnJson, contenidoEsperado, "La respuesta del " + campoJson + " debe ser " + contenidoEsperado);
+    }
 }
 

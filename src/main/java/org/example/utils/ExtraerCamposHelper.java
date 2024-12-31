@@ -23,5 +23,10 @@ public class ExtraerCamposHelper {
         return response.jsonPath().getString("data." + atributo);
     }
 
+    public String extraerDatosPaymentMethod(Response response, String atributo) {
+        return response.jsonPath().getString("data.payment_method." + atributo);
+    }
+
+
 
 }

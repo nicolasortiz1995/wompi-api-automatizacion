@@ -7,4 +7,6 @@ public class GlobalVariables {
     public static String globalLlaveIntegridad;
     public static String globalIdTransaccion;
     public static String globalDatoCreacionTransaccion;
+    public static String globalReferenciaAleatoria;
+    public static String globalMontoAleatorio;
 }

@@ -42,5 +42,14 @@ public class ApiWompiPage {
                 .response();
     }
 
-
+    public Response hacerPeticionGetParaObtenerEstadoTransaccion(String endpoint, String idTransaccion){
+        System.out.println("Id de la transacción: "+endpoint+idTransaccion);
+        return given()
+                .header("Content-Type", "application/json")
+                .when()
+                .get(baseUrl + endpoint + idTransaccion)
+                .then()
+                .extract()
+                .response();
+    }
 }

@@ -8,7 +8,7 @@ import java.util.Random;
 public class GenerarData {
     public static int generarMontoAleatorio() {
         Random random = new Random();
-        return 10000 + random.nextInt(990001);
+        return 100000 + random.nextInt(990001);
     }
 
     public static String generarReferencia() {
