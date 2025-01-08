@@ -158,6 +158,12 @@ Cada archivo `.feature` incluye escenarios etiquetados para facilitar su organiz
 
 ----------
 
+## A futuro
+
+**Recuerda:** Es fundamental mantener actualizadas las librerías, dependencias y configuraciones del proyecto para garantizar su mantenimiento y sostenibilidad a largo plazo.
+
+----------
+
 ## Hecho por
 
 Este proyecto fue desarrollado por [Nicolas Ortiz](https://www.linkedin.com/in/ortiznicolas/).
